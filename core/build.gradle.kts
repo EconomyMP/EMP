@@ -14,7 +14,7 @@ dependencies {
     api(project(":api"))
 
     @Suppress("GradleDependency")
-    compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:26.1.2.build.60-stable")
 
     shade("com.zaxxer:HikariCP:7.0.2")
     shade("org.mariadb.jdbc:mariadb-java-client:3.5.8")
