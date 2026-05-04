@@ -1,0 +1,436 @@
+# SmartSpawner – gui.yml
+# GUI item names, lore, titles, and button labels.
+
+# ──────────────────────────────────────────────────────
+#                  Main GUI
+# ──────────────────────────────────────────────────────
+gui_title_main:
+  single_spawner: '&#545454{ᴇɴᴛɪᴛʏ} ꜱᴘᴀᴡɴᴇʀ'
+  stacked_spawner: '&#545454{amount} {ᴇɴᴛɪᴛʏ} ꜱᴘᴀᴡɴᴇʀꜱ'
+
+spawner_storage_item:
+  name: '&#F97603sᴘᴀᴡɴᴇʀ sᴛᴏʀᴀɢᴇ'
+  lore:
+  - '{loot_items}'
+  loot_items: '&#F97603{amount} &f{item_name}'
+  loot_items_empty: '&#e6e6faɴᴏ ɪᴛᴇᴍ ᴅʀᴏᴘs'
+
+# Available placeholders:
+# {entity}           - Formatted entity name (e.g., "Zombie")
+# {ᴇɴᴛɪᴛʏ}           - Entity name in small caps (e.g., "ᴢᴏᴍʙɪᴇ")
+# {stack_size}       - Number of spawners stacked at this location
+# {range}            - Spawning range in blocks
+# {delay}            - Spawn delay in seconds
+# {min_mobs}         - Minimum number of mobs to spawn
+# {max_mobs}         - Maximum number of mobs to spawn
+# {current_items}    - Current number of items stored
+# {max_items}        - Maximum storage capacity for items
+# {percent_storage_rounded}  - Storage usage as integer percentage (e.g., "87")
+# {percent_storage_decimal} - Storage usage as formatted percentage with decimal (e.g., "87.5")
+# {current_exp}      - Current experience stored (formatted with commas)
+# {max_exp}          - Maximum experience capacity (formatted with commas)
+# {raw_current_exp}  - Raw current experience number
+# {raw_max_exp}      - Raw maximum experience number
+# {percent_exp_rounded}      - Experience storage as integer percentage
+# {percent_exp_decimal}    - Experience storage as formatted percentage with decimal (e.g., "42.7")spawner_info_item:
+spawner_info_item:
+  name: '&#FCE300{stack_size} {ᴇɴᴛɪᴛʏ} ꜱᴘᴀᴡɴᴇʀ'
+  lore:
+  - '&#FCE300● &fClick to sell items and collect xp'
+  - '&#FCE300Storage:&f {percent_storage_decimal}% &#FCE300Filled.'
+  - '&#FCE300Exp:&f {percent_exp_decimal}% &#FCE300Stored.'
+  lore_no_shop:
+  - '&#FCE300● &fClick to collect xp'
+  - '&#FCE300Storage:&f {percent_storage_decimal}% &#FCE300Filled.'
+  - '&#FCE300Exp:&f {percent_exp_decimal}% &#FCE300Stored.'
+  lore_full: ''
+  lore_inactive: ''
+  lore_no_loot: '&#ff3333ɴᴏ ʟᴏᴏᴛ ᴄᴏɴꜰɪɢᴜʀᴇᴅ'
+
+exp_info_item:
+  name: '&#7AFC00ᴄᴏʟʟᴇᴄᴛ ᴇxᴘ'
+  lore:
+  - '&#7AFC00{current_exp} &fXP Points'
+
+# ──────────────────────────────────────────────────────
+#              Spawner Stacker GUI
+# ──────────────────────────────────────────────────────
+gui_title_stacker: '&#545454ꜱᴘᴀᴡɴᴇʀ ꜱᴛᴀᴄᴋᴇʀ'
+
+button_spawner:
+  name: '&#3498db{ᴇɴᴛɪᴛʏ} ꜱᴘᴀᴡɴᴇʀ'
+  lore:
+  - ''
+  - '&#3498db◈ &#ecf0f1ꜱᴛᴀᴄᴋ ɪɴꜰᴏ:'
+  - '  &#bdc3c7•  ᴄᴜʀʀᴇɴᴛ: &#3498db{stack_size}'
+  - '  &#bdc3c7•  ᴍᴀx: &#3498db{max_stack_size}'
+  - ''
+  - '&#3498db⊳ &#ecf0f1ᴄʟɪᴄᴋ ᴛᴏ ʀᴇᴛᴜʀɴ ᴛᴏ ꜱᴘᴀᴡɴᴇʀ ᴍᴇɴᴜ'
+
+button_remove:
+  name: '&#ff5252-{amount} ꜱᴘᴀᴡɴᴇʀ{plural}'
+  lore:
+  - ''
+  - '&#e63939◈ &#ff7070ᴀᴄᴛɪᴏɴ:'
+  - '  &#f8f8ff•  ʀᴇᴍᴏᴠᴇ: &#ff5252{amount} &#e63939ꜱᴘᴀᴡɴᴇʀ{plural}'
+  - '  &#f8f8ff•  ᴄᴜʀʀᴇɴᴛ: &#ff5252{stack_size}'
+  - ''
+  - '&#e63939⊳ &#f8f8ffᴄʟɪᴄᴋ ᴛᴏ ʀᴇᴍᴏᴠᴇ ꜰʀᴏᴍ ꜱᴛᴀᴄᴋ'
+
+button_add:
+  name: '&#37eb9a+{amount} ꜱᴘᴀᴡɴᴇʀ{plural}'
+  lore:
+  - ''
+  - '&#2cc483◈ &#48e89bᴀᴄᴛɪᴏɴ:'
+  - '  &#f8f8ff•  ᴀᴅᴅ: &#37eb9a{amount} &#2cc483ꜱᴘᴀᴡɴᴇʀ{plural}'
+  - '  &#f8f8ff•  ᴄᴜʀʀᴇɴᴛ: &#37eb9a{stack_size}'
+  - ''
+  - '&#2cc483⊳ &#f8f8ffᴄʟɪᴄᴋ ᴛᴏ ᴀᴅᴅ ᴛᴏ ꜱᴛᴀᴄᴋ'
+
+button_remove_all:
+  name: '&#ff5252ʀᴇᴍᴏᴠᴇ ᴀʟʟ'
+  lore:
+  - ''
+  - '&#e63939◈ &#ff7070ᴀᴄᴛɪᴏɴ:'
+  - '  &#f8f8ff•  ʀᴇᴍᴏᴠᴇ ᴀʟʟ ꜱᴘᴀᴡɴᴇʀꜱ'
+  - '  &#f8f8ff•  ᴄᴜʀʀᴇɴᴛ: &#ff5252{stack_size}'
+  - ''
+  - '&#e63939⊳ &#f8f8ffᴄʟɪᴄᴋ ᴛᴏ ʀᴇᴍᴏᴠᴇ ᴀʟʟ ꜰʀᴏᴍ ꜱᴛᴀᴄᴋ'
+
+button_add_all:
+  name: '&#37eb9aᴀᴅᴅ ᴀʟʟ'
+  lore:
+  - ''
+  - '&#2cc483◈ &#48e89bᴀᴄᴛɪᴏɴ:'
+  - '  &#f8f8ff•  ᴀᴅᴅ ᴀʟʟ ꜱᴘᴀᴡɴᴇʀꜱ ꜰʀᴏᴍ ɪɴᴠᴇɴᴛᴏʀʏ'
+  - '  &#f8f8ff•  ᴄᴜʀʀᴇɴᴛ: &#37eb9a{stack_size}'
+  - ''
+  - '&#2cc483⊳ &#f8f8ffᴄʟɪᴄᴋ ᴛᴏ ᴀᴅᴅ ᴀʟʟ ᴛᴏ ꜱᴛᴀᴄᴋ'
+
+# ──────────────────────────────────────────────────────
+#            Sell Confirmation GUI
+# ──────────────────────────────────────────────────────
+gui_title_sell_confirm: '&#545454ᴄᴏɴꜰɪʀᴍ ꜱᴇʟʟ'
+
+button_sell_cancel:
+  name: '&#f50001ᴄᴀɴᴄᴇʟ'
+  lore:
+  - '&fClick to cancel'
+
+button_sell_confirm:
+  name: '&#01ff00ᴄᴏɴꜰɪʀᴍ'
+  lore:
+  - '&fClick to sell all items'
+  - '&7(${total_sell_price})'
+
+button_sell_confirm_with_exp:
+  name: '&#01ff00ᴄᴏɴꜰɪʀᴍ'
+  lore:
+  - '&fClick to sell all items and collect xp'
+  - '&7(${total_sell_price} + {current_exp} xp)'
+
+button_sell_info:
+  name: '&#02e57dʟᴏᴏᴛ'
+  lore:
+  - '{loot_items}'
+  loot_items: '&#02e57d{amount} &f{item_name}'
+  loot_items_empty: '&#e6e6faɴᴏ ɪᴛᴇᴍ ᴅʀᴏᴘs'
+
+# ──────────────────────────────────────────────────────
+#             Spawner Storage GUI
+# ──────────────────────────────────────────────────────
+# Available placeholders for gui_title_storage:
+# {current_page}     - Current page number
+# {total_pages}      - Total number of pages
+# {entity}           - Formatted entity name (e.g., "Zombie")
+# {ᴇɴᴛɪᴛʏ}           - Entity name in small caps (e.g., "ᴢᴏᴍʙɪᴇ")
+# {amount}           - Number of spawners stacked
+gui_title_storage: '&#545454{amount} {ᴇɴᴛɪᴛʏ} ꜱᴘᴀᴡɴᴇʀꜱ'
+
+navigation_button_previous:
+  name: '&#7AFC00ᴘʀᴇᴠɪᴏᴜꜱ'
+  lore:
+  - '&fClick to go back a page'
+
+navigation_button_next:
+  name: '&#7AFC00ɴᴇxᴛ'
+  lore:
+  - '&fClick to go forward a page'
+
+sell_button:
+  name: '&#00F986ꜱᴇʟʟ ᴀʟʟ'
+  lore:
+  - '&fClick to sell all mob drops'
+
+sell_and_exp_button:
+  name: '&aꜱᴇʟʟ & ᴇxᴘ'
+  lore:
+  - '&fClick to sell items and collect experience'
+
+return_button:
+  name: '&#FC0000ʀᴇᴛᴜʀɴ'
+  lore:
+  - '&fClick to return to the main menu'
+
+take_all_button:
+  name: '&#FCE300ᴛᴀᴋᴇ ᴀʟʟ'
+  lore:
+  - '&#FCE300● &fCollect loot from the storage'
+
+item_filter_button:
+  name: '&#3498dbꜰɪʟᴛᴇʀ ᴅʀᴏᴘꜱ'
+  lore:
+  - '&#3498db⊳ &#f8f8ffᴄʟɪᴄᴋ ᴛᴏ ᴄᴏɴꜰɪɢᴜʀᴇ'
+
+sort_items_button:
+  name: '&#00F986ꜱᴏʀᴛ ɪᴛᴇᴍꜱ'
+  lore:
+  - '{available_items}'
+  - ''
+  - '&#00F986⊳ &#f8f8ffᴄʟɪᴄᴋ ᴛᴏ ꜱᴏʀᴛ'
+  selected_item: '&#00F986• {item_name}'
+  unselected_item: '&#f8f8ff• {item_name}'
+  no_item: '&#bdc3c7• None'
+
+drop_page_button:
+  name: '&#00F986ᴅʀᴏᴘ ʟᴏᴏᴛ'
+  lore:
+  - '&fClick to drop all the loot on the page'
+
+collect_exp_button:
+  # Available placeholders: {current_exp}
+  name: '&#2ecc71ᴄʟᴀɪᴍ ᴇxᴘ: &#f8f8ff{current_exp} &#2ecc71xᴘ'
+  lore:
+  - '&#2ecc71⊳ &fClick to claim your XP'
+
+storage_spawner_info_button:
+  name: ''
+  lore:
+    - ''
+
+# ──────────────────────────────────────────────────────
+#             Filter Configuration GUI
+# ──────────────────────────────────────────────────────
+gui_title_filter_config: '    ᴀʟʟᴏᴡᴇᴅ           ʙʟᴏᴄᴋᴇᴅ'
+
+filter_divider:
+  name: '&#3498dbꜰɪʟᴛᴇʀ ɪᴛᴇᴍ ᴅʀᴏᴘꜱ'
+  lore:
+  - ''
+  - '&#f8f8ff⋮ ʟᴇꜰᴛ ꜱɪᴅᴇ: &#37eb9aᴀʟʟᴏᴡᴇᴅ ɪᴛᴇᴍꜱ'
+  - '&#f8f8ff⋮ ʀɪɢʜᴛ ꜱɪᴅᴇ: &#ff5252ʙʟᴏᴄᴋᴇᴅ ɪᴛᴇᴍꜱ'
+  - ''
+  - '&#3498db⊳ &#f8f8ffᴄʟɪᴄᴋ ᴛᴏ ʀᴇᴛᴜʀɴ ᴛᴏ ꜱᴛᴏʀᴀɢᴇ'
+
+filter_item_allowed:
+  name: '&#37eb9a{item_name}'
+  lore:
+  - '&#f8f8ffꜱᴛᴀᴛᴜꜱ: &#37eb9aᴀʟʟᴏᴡᴇᴅ &#f8f8ff- ᴄʟɪᴄᴋ ᴛᴏ ʙʟᴏᴄᴋ'
+
+filter_item_blocked:
+  name: '&#ff5252{item_name}'
+  lore:
+  - '&#f8f8ffꜱᴛᴀᴛᴜꜱ: &#ff5252ʙʟᴏᴄᴋᴇᴅ &#f8f8ff- ᴄʟɪᴄᴋ ᴛᴏ ᴀʟʟᴏᴡ'
+
+# ──────────────────────────────────────────────────────
+#                List Command GUIs
+# ──────────────────────────────────────────────────────
+# World Selection GUI
+gui_title_world_selection: ꜱᴇʟᴇᴄᴛ ᴡᴏʀʟᴅ
+
+world_buttons:
+  overworld:
+    name: '&#37eb9aᴏᴠᴇʀᴡᴏʀʟᴅ'
+    lore:
+    - ''
+    - '&#2cc483◈ &#48e89bꜱᴘᴀᴡɴᴇʀꜱ:'
+    - '  &#f8f8ff•  ᴛᴏᴛᴀʟ: &#37eb9a{total}'
+    - '  &#f8f8ff•  ꜱᴛᴀᴄᴋᴇᴅ: &#37eb9a{total_stacked}'
+    - ''
+    - '&#2cc483⊳ &#f8f8ffᴄʟɪᴄᴋ ᴛᴏ ᴠɪᴇᴡ ꜱᴘᴀᴡɴᴇʀꜱ'
+  nether:
+    name: '&#ff5252ɴᴇᴛʜᴇʀ'
+    lore:
+    - ''
+    - '&#e63939◈ &#ff7070ꜱᴘᴀᴡɴᴇʀꜱ:'
+    - '  &#f8f8ff•  ᴛᴏᴛᴀʟ: &#ff5252{total}'
+    - '  &#f8f8ff•  ꜱᴛᴀᴄᴋᴇᴅ: &#ff5252{total_stacked}'
+    - ''
+    - '&#e63939⊳ &#f8f8ffᴄʟɪᴄᴋ ᴛᴏ ᴠɪᴇᴡ ꜱᴘᴀᴡɴᴇʀꜱ'
+  end:
+    name: '&#d8c5ffᴛʜᴇ ᴇɴᴅ'
+    lore:
+    - ''
+    - '&#7b68ee◈ &#a885fcꜱᴘᴀᴡɴᴇʀꜱ:'
+    - '  &#f8f8ff•  ᴛᴏᴛᴀʟ: &#c2a8fc{total}'
+    - '  &#f8f8ff•  ꜱᴛᴀᴄᴋᴇᴅ: &#c2a8fc{total_stacked}'
+    - ''
+    - '&#7b68ee⊳ &#f8f8ffᴄʟɪᴄᴋ ᴛᴏ ᴠɪᴇᴡ ꜱᴘᴀᴡɴᴇʀꜱ'
+  custom_overworld:
+    name: '&#37eb9a{world_name}'
+    lore:
+    - ''
+    - '&#2cc483◈ &#48e89bꜱᴘᴀᴡɴᴇʀꜱ:'
+    - '  &#f8f8ff•  ᴛᴏᴛᴀʟ: &#37eb9a{total}'
+    - '  &#f8f8ff•  ꜱᴛᴀᴄᴋᴇᴅ: &#37eb9a{total_stacked}'
+    - ''
+    - '&#2cc483⊳ &#f8f8ffᴄʟɪᴄᴋ ᴛᴏ ᴠɪᴇᴡ ꜱᴘᴀᴡɴᴇʀꜱ'
+  custom_nether:
+    name: '&#ff5252{world_name}'
+    lore:
+    - ''
+    - '&#e63939◈ &#ff7070ꜱᴘᴀᴡɴᴇʀꜱ:'
+    - '  &#f8f8ff•  ᴛᴏᴛᴀʟ: &#ff5252{total}'
+    - '  &#f8f8ff•  ꜱᴛᴀᴄᴋᴇᴅ: &#ff5252{total_stacked}'
+    - ''
+    - '&#e63939⊳ &#f8f8ffᴄʟɪᴄᴋ ᴛᴏ ᴠɪᴇᴡ ꜱᴘᴀᴡɴᴇʀꜱ'
+  custom_end:
+    name: '&#d8c5ff{world_name}'
+    lore:
+    - ''
+    - '&#7b68ee◈ &#a885fcꜱᴘᴀᴡɴᴇʀꜱ:'
+    - '  &#f8f8ff•  ᴛᴏᴛᴀʟ: &#c2a8fc{total}'
+    - '  &#f8f8ff•  ꜱᴛᴀᴄᴋᴇᴅ: &#c2a8fc{total_stacked}'
+    - ''
+    - '&#7b68ee⊳ &#f8f8ffᴄʟɪᴄᴋ ᴛᴏ ᴠɪᴇᴡ ꜱᴘᴀᴡɴᴇʀꜱ'
+  custom_default:
+    name: '&#ab7afd{world_name}'
+    lore:
+    - ''
+    - '&#7b68ee◈ &#a885fcꜱᴘᴀᴡɴᴇʀꜱ:'
+    - '  &#f8f8ff•  ᴛᴏᴛᴀʟ: &#c2a8fc{total}'
+    - '  &#f8f8ff•  ꜱᴛᴀᴄᴋᴇᴅ: &#c2a8fc{total_stacked}'
+    - ''
+    - '&#7b68ee⊳ &#f8f8ffᴄʟɪᴄᴋ ᴛᴏ ᴠɪᴇᴡ ꜱᴘᴀᴡɴᴇʀꜱ'
+
+# Spawner List GUI
+gui_title_spawner_list: '{world} - [{current}/{total}]'
+
+filter:
+  button:
+    name: '&#00F986ꜰɪʟᴛᴇʀ sᴘᴀᴡɴᴇʀs'
+    lore:
+    - '{available_options}'
+    - ''
+    - '&#00F986⊳ &#f8f8ffᴄʟɪᴄᴋ ᴛᴏ ꜰɪʟᴛᴇʀ'
+  selected_option: '&#00F986• {option_name}'
+  unselected_option: '&#f8f8ff• {option_name}'
+  all: ᴀʟʟ
+  active: ᴀᴄᴛɪᴠᴇ
+  inactive: ɪɴᴀᴄᴛɪᴠᴇ
+
+sort:
+  button:
+    name: '&#00F986ꜱᴏʀᴛ ꜱᴘᴀᴡɴᴇʀꜱ'
+    lore:
+    - '{available_options}'
+    - ''
+    - '&#00F986⊳ &#f8f8ffᴄʟɪᴄᴋ ᴛᴏ ꜱᴏʀᴛ'
+  selected_option: '&#00F986• {option_name}'
+  unselected_option: '&#f8f8ff• {option_name}'
+  default: ᴅᴇꜰᴀᴜʟᴛ (ɪᴅ)
+  stack_size_asc: ꜱᴛᴀᴄᴋ ꜱɪᴢᴇ (↑)
+  stack_size_desc: ꜱᴛᴀᴄᴋ ꜱɪᴢᴇ (↓)
+
+spawner_item_list:
+  name: '&#3498dbꜱᴘᴀᴡɴᴇʀ #{id}'
+  lore:
+  - '&#3498db⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯'
+  - '&#3498db◈ &#ecf0f1ᴅᴇᴛᴀɪʟꜱ:'
+  - '  &#bdc3c7•  ᴇɴᴛɪᴛʏ: &#3498db{entity}'
+  - '  &#bdc3c7•  ꜱᴛᴀᴄᴋ: &#3498db{size}'
+  - '  &#bdc3c7•  ꜱᴛᴀᴛᴜꜱ: {status_color}{status_text}'
+  - '  &#bdc3c7•  ʟᴀꜱᴛ ᴜꜱᴇʀ: &#3498db{last_player}'
+  - '  &#bdc3c7•  ʟᴏᴄᴀᴛɪᴏɴ: &#3498dbx: {x}, ʏ: {y}, ᴢ: {z}'
+  - '&#3498db⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯'
+  - '&#3498db⊳ &#ecf0f1ᴄʟɪᴄᴋ ᴛᴏ ᴍᴀɴᴀɢᴇ ꜱᴘᴀᴡɴᴇʀ'
+
+# ──────────────────────────────────────────────────────
+#              Spawner Management GUI
+# ──────────────────────────────────────────────────────
+spawner_management:
+  title: ᴍᴀɴᴀɢᴇ ꜱᴘᴀᴡɴᴇʀ
+  
+  teleport:
+    name: '&#00897Bᴛᴇʟᴇᴘᴏʀᴛ ᴛᴏ ᴛʜɪꜱ ꜱᴘᴀᴡɴᴇʀ'
+    lore:
+    - '&#00897B⊳ &#f8f8ffᴄʟɪᴄᴋ ᴛᴏ ᴛᴇʟᴇᴘᴏʀᴛ '
+  
+  open_spawner:
+    name: '&#3498dbᴠɪᴇᴡ ᴛʜɪꜱ ꜱᴘᴀᴡɴᴇʀ ɢᴜɪ'
+    lore:
+    - '&#3498db⊳ &#f8f8ffᴄʟɪᴄᴋ ᴛᴏ ᴠɪᴇᴡ'
+  
+  stack:
+    name: '&#3498dbᴇᴅɪᴛ ᴛʜɪꜱ ꜱᴘᴀᴡɴᴇʀ ꜱᴛᴀᴄᴋ ꜱɪᴢᴇ'
+    lore:
+    - '&#3498db⊳ &#f8f8ffᴄʟɪᴄᴋ ᴛᴏ ᴇᴅɪᴛ'
+  
+  remove:
+    name: '&#ff5252ʀᴇᴍᴏᴠᴇ ᴛʜɪꜱ ꜱᴘᴀᴡɴᴇʀ'
+    lore:
+    - '&#ff5252⊳ &#f8f8ffᴄʟɪᴄᴋ ᴛᴏ ʀᴇᴍᴏᴠᴇ'
+  
+  back:
+    name: '&#ff5252ʙᴀᴄᴋ ᴛᴏ ꜱᴘᴀᴡɴᴇʀ ʟɪꜱᴛ'
+    lore:
+    - '&#ff5252⊳ &#f8f8ffᴄʟɪᴄᴋ ᴛᴏ ɢᴏ ʙᴀᴄᴋ'
+
+navigation:
+  previous_page: '&#37eb9aᴘʀᴇᴠɪᴏᴜꜱ ᴘᴀɢᴇ'
+  next_page: '&#37eb9aɴᴇxᴛ ᴘᴀɢᴇ'
+  back: '&#ff5252ʙᴀᴄᴋ ᴛᴏ ᴡᴏʀʟᴅ ꜱᴇʟᴇᴄᴛɪᴏɴ'
+  close: '&#ff5252ᴄʟᴏꜱᴇ'
+
+# ──────────────────────────────────────────────────────
+#                  Prices GUI
+# ──────────────────────────────────────────────────────
+prices_gui_title: ꜱᴇʟʟ ᴘʀɪᴄᴇꜱ - [{current_page}/{total_pages}]
+
+price_item:
+  name: '&#3498db{item_name}'
+  lore:
+  - ''
+  - '&#3498db◈ &#ecf0f1ᴘʀɪᴄᴇ:'
+  - '  &#bdc3c7•  ꜰɪɴᴀʟ: &a${price}'
+  - '  &#bdc3c7•  ꜱᴏᴜʀᴄᴇ: &#3498db{price_source}'
+
+# ──────────────────────────────────────────────────────
+#                  Bedrock GUI
+# ──────────────────────────────────────────────────────
+bedrock:
+  main_gui:
+    title_single_spawner: '{entity} Spawner'
+    title_stacked_spawner: '{amount} {entity} Spawners'
+    
+    view_info_title: '{entity} Spawner - Information'
+    
+    button_names:
+      storage: Open Storage
+      exp: Collect EXP
+      stacker: Manage Stack
+      sell_and_exp: Sell Items & Collect EXP
+      sell: Sell Items
+      view_info: View Info
+      back: Back
+    
+    # Spawner Info (displayed below buttons in Bedrock UI)
+    # Available placeholders: see en_US/gui.yml for complete list
+    # IMPORTANT: Only use Bedrock-compatible color codes (§0-§9, §a-§f, §g)
+    spawner_info:
+    - ''
+    - '§9◈ §fInformation:'
+    - '  §7• Stack: §9{stack_size}'
+    - '  §7• Range: §9{range} §7blocks'
+    - '  §7• Mobs: §9{min_mobs} §7- §9{max_mobs}'
+    - '  §7• Delay: §9{delay} §7s'
+    - ''
+    - '§9◈ §fStorage:'
+    - '  §7• Items: §9{current_items} §7/ §9{max_items}'
+    - '  §7• Storage: §9{percent_storage_decimal}% §7full'
+    - ''
+    - '§9◈ §fExperience:'
+    - '  §7• Current: §a{current_exp} §7/ §a{max_exp} §axp'
+    - '  §7• Stored: §a{percent_exp_decimal}% §7xp'
+    - ''
+    - '§a◈ §fSellable Value: §a+${total_sell_price}'

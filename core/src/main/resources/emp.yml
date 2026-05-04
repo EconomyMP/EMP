@@ -1,0 +1,71 @@
+# EMP economy and gems configuration
+
+# ---------------------------------------------------
+#                   Economy Settings
+# ---------------------------------------------------
+economy:
+  starting_balance: 0.0
+  transaction_logging: true
+
+  currency:
+    symbol: "$"
+    format: "{symbol}{amount}"
+    decimals: 2
+    thousands_separator: ","
+    decimal_separator: "."
+    singular: "Coin"
+    plural: "Coins"
+
+  vault_provider:
+    enabled: true
+    override: true
+
+  baltop:
+    page_size: 10
+
+# ---------------------------------------------------
+#                     Gems Settings
+# ---------------------------------------------------
+gems:
+  starting_balance: 0
+  currency:
+    symbol: "G"
+    format: "{amount} {symbol}"
+    decimals: 0
+    thousands_separator: ","
+    decimal_separator: "."
+
+  playtime:
+    enabled: true
+    gems_per_minute: 1
+    award_interval: 60s
+    active_within: 2m
+    notify: false
+
+  kills:
+    enabled: true
+    gems_per_kill: 70
+    cooldown: 5m
+    block_same_ip: true
+    notify: true
+
+# ---------------------------------------------------
+#               Double Gems Event
+# ---------------------------------------------------
+double_gems:
+  enabled: false
+  multiplier: 2.0
+  announce: true
+  mode: RANGE
+  timezone: "UTC"
+
+  range:
+    start: "2026-05-04T00:00:00"
+    end: "2026-05-05T00:00:00"
+
+  weekly:
+    days:
+      - SATURDAY
+      - SUNDAY
+    start_time: "00:00"
+    end_time: "23:59"

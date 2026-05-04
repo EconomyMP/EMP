@@ -1,0 +1,161 @@
+name: EMP
+version: '${version}'
+main: github.nighter.smartspawner.SmartSpawner
+api-version: '1.21'
+authors: [ https://github.com/NighterDevelopment/SmartSpawner ]
+folia-supported: true
+softdepend:
+  # Bedrock Support Plugins
+  - floodgate
+  - Geyser-Spigot
+
+  # Shop Plugins
+  - EconomyShopGUI
+  - EconomyShopGUI-Premium
+  - ShopGUIPlus
+  - zShop
+  - ExcellentShop
+
+  # Utility/Economy Plugins
+  - CoinsEngine
+  - Vault
+
+  # Protection/Region Plugins
+  - WorldGuard
+  - GriefPrevention
+  - Lands
+  - Towny
+  - SimpleClaimSystem
+  - minePlots
+  - PlotSquared
+  - Residence
+  - HuskClaims
+
+  # World Management Plugins
+  - Multiverse-Core
+  - MultiWorld
+  - Worlds
+  - SuperiorSkyblock2
+  - BentoBox
+  - IridiumSkyblock
+
+  # RPG/Skill Plugins
+  - AuraSkills
+
+  #Drops Plugins
+  - MythicMobs
+
+commands:
+  smartspawner:
+    description: Main command for EMP spawner systems
+    usage: /smartspawner [reload|give|list|hologram|prices|clear|near] [args...]
+    aliases: [ ss, spawner ]
+    permission: smartspawner.command.use
+    permission-message: "You don't have permission to use EMP spawner commands!"
+
+  bal:
+    description: View your balance or another player's balance
+    usage: /bal [player]
+    aliases: [ balance ]
+    permission: emp.command.bal
+
+  pay:
+    description: Pay another player money
+    usage: /pay <player> <amount>
+    permission: emp.command.pay
+
+  baltop:
+    description: View the top money balances
+    usage: /baltop [page]
+    permission: emp.command.baltop
+
+  eco:
+    description: Economy admin commands
+    usage: /eco <give|take|set> <player> <amount>
+    permission: emp.command.eco
+
+  gems:
+    description: View and manage gem balances
+    usage: /gems [pay|give|take] <player> <amount>
+    permission: emp.command.gems
+
+permissions:
+  # Main command permission
+  smartspawner.command.use:
+    description: Allow access to SmartSpawner commands
+    default: op
+
+  # Subcommand permissions
+  smartspawner.command.reload:
+    description: Permission to reload SmartSpawner plugin
+    default: op
+
+  smartspawner.command.give:
+    description: Allow giving spawners to yourself
+    default: op
+
+  smartspawner.command.list:
+    description: Allow viewing list of spawners and teleporting to them
+    default: op
+
+  smartspawner.command.hologram:
+    description: Allow toggling hologram for spawners
+    default: op
+
+  smartspawner.command.prices:
+    description: Allow viewing sell prices of spawner items
+    default: true
+
+  smartspawner.command.clear:
+    description: Allow clearing holograms and ghost spawners
+    default: op
+
+  smartspawner.command.near:
+    description: Allow highlighting nearby spawners through walls
+    default: op
+
+  # Feature permissions
+  smartspawner.changetype:
+    description: Allow changing spawner type with spawn egg
+    default: op
+
+  smartspawner.stack:
+    description: Allow stacking spawners
+    default: true
+
+  smartspawner.break:
+    description: Allow breaking spawners
+    default: true
+
+  smartspawner.sellall:
+    description: Allow selling items in spawner storage GUI
+    default: true
+
+  # EMP economy permissions
+  emp.command.bal:
+    description: Allow viewing money balance
+    default: true
+
+  emp.command.bal.other:
+    description: Allow viewing other players' balances
+    default: op
+
+  emp.command.pay:
+    description: Allow paying other players
+    default: true
+
+  emp.command.baltop:
+    description: Allow viewing balance leaderboard
+    default: true
+
+  emp.command.eco:
+    description: Allow admin economy commands
+    default: op
+
+  emp.command.gems:
+    description: Allow viewing and paying with gems
+    default: true
+
+  emp.command.gems.admin:
+    description: Allow admin gem commands
+    default: op
