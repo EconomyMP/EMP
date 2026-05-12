@@ -93,15 +93,15 @@ public class ManufacturingOrderService {
     public OrderResult completeOrder(UUID manufacturerUuid, long orderId) {
         Optional<ManufacturingOrder> optional = getOrder(orderId);
         if (optional.isEmpty()) {
-            return OrderResult.fail("not_found");
+            return OrderResult.ofFail("not_found");
         }
 
         ManufacturingOrder order = optional.get();
         if (!order.manufacturerUuid().equals(manufacturerUuid)) {
-            return OrderResult.fail("not_owner");
+            return OrderResult.ofFail("not_owner");
         }
         if (!"PENDING".equalsIgnoreCase(order.status())) {
-            return OrderResult.fail("already_completed");
+            return OrderResult.ofFail("already_completed");
         }
 
         try (Connection conn = databaseManager.getConnection();
@@ -111,10 +111,10 @@ public class ManufacturingOrderService {
 
             accountService.addBalance(manufacturerUuid, order.manufacturerName(), CurrencyType.MONEY, order.totalPrice(),
                     "MFG_PAYMENT", order.buyerName(), order.itemName());
-            return OrderResult.success();
+            return OrderResult.ofSuccess();
         } catch (SQLException e) {
             plugin.getLogger().warning("Failed to complete order: " + e.getMessage());
-            return OrderResult.fail("database_error");
+            return OrderResult.ofFail("database_error");
         }
     }
 
@@ -150,7 +150,7 @@ public class ManufacturingOrderService {
 
     public record ManufacturingOrder(long id, UUID buyerUuid, String buyerName, UUID manufacturerUuid, String manufacturerName, String itemName, int quantity, long pricePerUnit, long totalPrice, String status) {}
     public record OrderResult(boolean success, String errorKey) {
-        public static OrderResult success() { return new OrderResult(true, null); }
-        public static OrderResult fail(String errorKey) { return new OrderResult(false, errorKey); }
+        public static OrderResult ofSuccess() { return new OrderResult(true, null); }
+        public static OrderResult ofFail(String errorKey) { return new OrderResult(false, errorKey); }
     }
 }

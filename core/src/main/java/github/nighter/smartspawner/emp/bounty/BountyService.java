@@ -48,16 +48,16 @@ public class BountyService {
 
     public BountyResult placeBounty(Player placer, Player target, long amount) {
         if (amount <= 0) {
-            return BountyResult.fail("invalid_amount");
+            return BountyResult.ofFail("invalid_amount");
         }
         if (placer.getUniqueId().equals(target.getUniqueId())) {
-            return BountyResult.fail("self");
+            return BountyResult.ofFail("self");
         }
 
         BalanceChangeResult result = accountService.takeBalance(placer.getUniqueId(), placer.getName(), CurrencyType.MONEY,
                 amount, "BOUNTY_PLACE", placer.getName(), target.getName());
         if (!result.success()) {
-            return BountyResult.fail("insufficient");
+            return BountyResult.ofFail("insufficient");
         }
 
         String sql = storageMode == StorageMode.SQLITE
@@ -73,10 +73,10 @@ public class BountyService {
             plugin.getLogger().warning("Failed to save bounty: " + e.getMessage());
             accountService.addBalance(placer.getUniqueId(), placer.getName(), CurrencyType.MONEY, amount,
                     "BOUNTY_REFUND", target.getName(), placer.getName());
-            return BountyResult.fail("invalid");
+            return BountyResult.ofFail("invalid");
         }
 
-        return BountyResult.success();
+        return BountyResult.ofSuccess();
     }
 
     public long claimBounty(Player killer, Player victim) {
@@ -125,11 +125,11 @@ public class BountyService {
     }
 
     public record BountyResult(boolean success, String errorKey) {
-        public static BountyResult success() {
+        public static BountyResult ofSuccess() {
             return new BountyResult(true, null);
         }
 
-        public static BountyResult fail(String errorKey) {
+        public static BountyResult ofFail(String errorKey) {
             return new BountyResult(false, errorKey);
         }
     }

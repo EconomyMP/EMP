@@ -139,7 +139,7 @@ public class TeamService {
             deleteInvite(conn, invite.teamId(), invited.getUniqueId());
             conn.commit();
 
-            TeamMembership membership = new TeamMembership(invite.teamId(), invite.teamName(), invite.ownerUuid(), invite.ownerName(), invited.getUniqueId(), invited.getName(), "MEMBER");
+            TeamMembership membership = new TeamMembership(invite.teamId(), invite.teamName(), invite.inviterUuid(), invite.inviterName(), invited.getUniqueId(), invited.getName(), "MEMBER");
             membershipCache.put(invited.getUniqueId(), membership);
             if (plugin.getChatPresentationService() != null) {
                 plugin.getChatPresentationService().refreshOnlinePlayers();

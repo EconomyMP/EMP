@@ -221,7 +221,7 @@ public class ManufacturingCommand {
 
         Scheduler.runTaskAsync(() -> {
             var buyerOrders = orderService.getBuyerOrders(player.getUniqueId());
-            var manufacturerOrders = manufacturerService.isManufacturer(player.getUniqueId()) 
+            java.util.List<ManufacturingOrderService.ManufacturingOrder> manufacturerOrders = manufacturerService.isManufacturer(player.getUniqueId()) 
                     ? orderService.getManufacturerOrders(player.getUniqueId()) 
                     : List.of();
 
