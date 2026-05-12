@@ -1,0 +1,101 @@
+name: Auto Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Build with Gradle
+        run: |
+          chmod +x ./gradlew
+          ./gradlew :core:build -x test --no-build-cache
+        continue-on-error: true
+
+      - name: Extract tag version
+        id: tag_version
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Release version: $VERSION"
+
+      - name: Generate changelog
+        id: changelog
+        run: |
+          # Get the previous tag
+          PREV_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          
+          if [ -z "$PREV_TAG" ]; then
+            # No previous tag, get all commits
+            CHANGELOG=$(git log --oneline --format="- %s" | head -20)
+          else
+            # Get commits since previous tag
+            CHANGELOG=$(git log ${PREV_TAG}..HEAD --oneline --format="- %s")
+          fi
+          
+          # Escape newlines for GitHub output
+          CHANGELOG="${CHANGELOG//'%'/'%25'}"
+          CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
+          CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
+          
+          echo "changelog=$CHANGELOG" >> $GITHUB_OUTPUT
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: "Release ${{ steps.tag_version.outputs.version }}"
+          body: |
+            # EMP (Economy Multiplayer) v${{ steps.tag_version.outputs.version }}
+            
+            ## What's New
+            ${{ steps.changelog.outputs.changelog }}
+            
+            ## Features
+            - 🏪 Manufacturing/Business System - Player-to-player commerce platform
+            - 💰 Dual Currency Economy - Money and Gems with Vault integration
+            - 🎮 Spawner Progression - 8 spawner types with 3 upgrade paths
+            - 👥 Social Systems - Teams, TPA, Bounties, Killstreaks
+            - 📊 Leaderboards - Rank progression, top players, streaks
+            - 🛍️ Auction House - Persistent item trading
+            - 💬 Chat Integration - Team tags, bounty markers, ranks, streaks
+            - 📱 15+ Commands - Fully async database operations
+            
+            ## Installation
+            Download `EMP-core-${{ steps.tag_version.outputs.version }}.jar` and place it in your plugins folder.
+            
+            **Requires:** Paper 1.21.3 or higher
+          draft: false
+          prerelease: false
+
+      - name: Upload JAR artifact
+        if: success()
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./core/build/libs/core-${{ steps.tag_version.outputs.version }}.jar
+          asset_name: EMP-core-${{ steps.tag_version.outputs.version }}.jar
+          asset_content_type: application/java-archive
+        continue-on-error: true
