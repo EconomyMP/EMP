@@ -19,7 +19,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import github.nighter.smartspawner.Scheduler;
-import org.bukkit.event.player.AsyncChatEvent;
+import io.papermc.paper.event.player.AsyncChatEvent;
 
 public class EmpPlayerListener implements Listener {
     private final EmpAccountService accountService;
