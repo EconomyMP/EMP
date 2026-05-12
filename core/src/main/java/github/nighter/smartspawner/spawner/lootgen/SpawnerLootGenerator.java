@@ -1,6 +1,8 @@
 package github.nighter.smartspawner.spawner.lootgen;
 
 import github.nighter.smartspawner.SmartSpawner;
+import github.nighter.smartspawner.emp.spawner.EmpSpawnerProgressionService;
+import github.nighter.smartspawner.emp.spawner.SpawnerTier;
 import github.nighter.smartspawner.spawner.gui.synchronization.SpawnerGuiViewManager;
 import github.nighter.smartspawner.spawner.properties.SpawnerData;
 import github.nighter.smartspawner.spawner.data.SpawnerManager;
@@ -19,12 +21,14 @@ public class SpawnerLootGenerator {
     private final SpawnerGuiViewManager spawnerGuiViewManager;
     private final SpawnerManager spawnerManager;
     private final Random random;
+    private final EmpSpawnerProgressionService progressionService;
 
     public SpawnerLootGenerator(SmartSpawner plugin) {
         this.plugin = plugin;
         this.spawnerGuiViewManager = plugin.getSpawnerGuiViewManager();
         this.spawnerManager = plugin.getSpawnerManager();
         this.random = new Random();
+        this.progressionService = plugin.getEmpSpawnerProgressionService();
     }
 
     public void spawnLootToSpawner(SpawnerData spawner) {
@@ -183,6 +187,25 @@ public class SpawnerLootGenerator {
     }
 
     public LootResult generateLoot(int minMobs, int maxMobs, SpawnerData spawner) {
+        if (progressionService != null) {
+            SpawnerTier tier = progressionService.getTierByEntity(spawner.getEntityType());
+            if (tier != null) {
+                int amount = progressionService.getOutputPerCycle(spawner);
+                if (amount > 0) {
+                    List<ItemStack> items = new ArrayList<>();
+                    int remaining = amount;
+                    while (remaining > 0) {
+                        int stackAmount = Math.min(remaining, tier.outputMaterial().getMaxStackSize());
+                        items.add(new ItemStack(tier.outputMaterial(), stackAmount));
+                        remaining -= stackAmount;
+                    }
+                    long exp = Math.max(0L, Math.round(spawner.getEntityExperienceValue()));
+                    return new LootResult(items, exp);
+                }
+            }
+        }
+
+        double efficiencyBonus = progressionService != null ? progressionService.getEfficiencyChanceBonus(spawner) : 0.0;
 
         int mobCount = random.nextInt(maxMobs - minMobs + 1) + minMobs;
         long totalExperienceLong = (long) spawner.getEntityExperienceValue() * mobCount;
@@ -205,7 +228,8 @@ public class SpawnerLootGenerator {
 
             // Calculate binomial distribution - how many mobs will drop this item
             for (int i = 0; i < mobCount; i++) {
-                if (random.nextDouble() * 100 <= lootItem.chance()) {
+                double chance = Math.min(100.0, lootItem.chance() + efficiencyBonus);
+                if (random.nextDouble() * 100 <= chance) {
                     successfulDrops++;
                 }
             }

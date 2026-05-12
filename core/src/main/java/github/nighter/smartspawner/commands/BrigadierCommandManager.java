@@ -17,8 +17,14 @@ public class BrigadierCommandManager {
     public BrigadierCommandManager(SmartSpawner plugin) {
         this.plugin = plugin;
         this.mainCommand = new MainCommand(plugin);
-        if (plugin.getEmpAccountService() != null) {
-            this.empCommandRegistrar = new EmpCommandRegistrar(plugin, plugin.getEmpAccountService());
+        if (plugin.getEmpAccountService() != null && plugin.getEmpSpawnerGuiService() != null
+            && plugin.getTeleportRequestService() != null && plugin.getTeamService() != null
+            && plugin.getBountyService() != null && plugin.getKillstreakService() != null
+                && plugin.getAuctionHouseService() != null && plugin.getRankService() != null
+                && plugin.getManufacturerService() != null && plugin.getManufacturingOrderService() != null) {
+            this.empCommandRegistrar = new EmpCommandRegistrar(plugin, plugin.getEmpAccountService(), plugin.getEmpSpawnerGuiService(),
+                plugin.getTeleportRequestService(), plugin.getTeamService(), plugin.getBountyService(), plugin.getKillstreakService(),
+                    plugin.getAuctionHouseService(), plugin.getRankService(), plugin.getManufacturerService(), plugin.getManufacturingOrderService());
         } else {
             this.empCommandRegistrar = null;
         }

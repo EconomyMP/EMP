@@ -20,7 +20,16 @@ import github.nighter.smartspawner.emp.economy.VaultEconomyProvider;
 import github.nighter.smartspawner.emp.gems.ActivityTracker;
 import github.nighter.smartspawner.emp.gems.GemEventService;
 import github.nighter.smartspawner.emp.gems.GemRewardService;
+import github.nighter.smartspawner.emp.bounty.BountyService;
+import github.nighter.smartspawner.emp.chat.ChatPresentationService;
+import github.nighter.smartspawner.emp.auction.AuctionHouseService;
+import github.nighter.smartspawner.emp.killstreak.KillstreakService;
+import github.nighter.smartspawner.emp.rank.RankService;
 import github.nighter.smartspawner.emp.listeners.EmpPlayerListener;
+import github.nighter.smartspawner.emp.spawner.EmpSpawnerProgressionService;
+import github.nighter.smartspawner.emp.spawner.gui.EmpSpawnerGuiService;
+import github.nighter.smartspawner.emp.team.TeamService;
+import github.nighter.smartspawner.emp.tpa.TeleportRequestService;
 import github.nighter.smartspawner.emp.storage.EmpDatabase;
 import github.nighter.smartspawner.extras.HopperConfig;
 import github.nighter.smartspawner.spawner.config.SpawnerSettingsConfig;
@@ -86,6 +95,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.ServicePriority;
 import net.milkbowl.vault.economy.Economy;
+import org.bukkit.NamespacedKey;
 
 import java.util.logging.Level;
 
@@ -182,6 +192,17 @@ public class SmartSpawner extends JavaPlugin implements SmartSpawnerPlugin {
     private GemEventService gemEventService;
     private GemRewardService gemRewardService;
     private EmpPlayerListener empPlayerListener;
+    private EmpSpawnerProgressionService empSpawnerProgressionService;
+    private EmpSpawnerGuiService empSpawnerGuiService;
+    private TeleportRequestService teleportRequestService;
+    private TeamService teamService;
+    private BountyService bountyService;
+    private KillstreakService killstreakService;
+    private ChatPresentationService chatPresentationService;
+    private AuctionHouseService auctionHouseService;
+    private RankService rankService;
+    private github.nighter.smartspawner.emp.manufacturing.ManufacturerService manufacturerService;
+    private github.nighter.smartspawner.emp.manufacturing.ManufacturingOrderService manufacturingOrderService;
 
     // API implementation
     private SmartSpawnerAPIImpl apiImpl;
@@ -341,7 +362,27 @@ public class SmartSpawner extends JavaPlugin implements SmartSpawnerPlugin {
         this.gemEventService = new GemEventService(this, empConfig);
         this.activityTracker = new ActivityTracker();
         this.gemRewardService = new GemRewardService(this, empConfig, empAccountService, activityTracker, gemEventService);
-        this.empPlayerListener = new EmpPlayerListener(empAccountService, activityTracker, gemRewardService);
+        this.teleportRequestService = new TeleportRequestService(this, empDatabase, databaseManager);
+        this.teleportRequestService.loadPendingRequests();
+        this.teamService = new TeamService(this, databaseManager);
+        this.teamService.warmCache();
+        this.bountyService = new BountyService(this, databaseManager, empAccountService);
+        this.killstreakService = new KillstreakService(this, databaseManager);
+        this.rankService = new RankService(this, empAccountService);
+        this.chatPresentationService = new ChatPresentationService(this, teamService, bountyService, killstreakService, rankService);
+        this.auctionHouseService = new AuctionHouseService(this, databaseManager, empAccountService);
+        this.auctionHouseService.ensureTable();
+        this.empSpawnerProgressionService = new EmpSpawnerProgressionService(this, databaseManager, empAccountService);
+        if (!empSpawnerProgressionService.initialize()) {
+            getLogger().severe("Failed to initialize EMP spawner progression service.");
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
+        this.empSpawnerGuiService = new EmpSpawnerGuiService(this, empSpawnerProgressionService, empAccountService);
+        this.manufacturerService = new github.nighter.smartspawner.emp.manufacturing.ManufacturerService(this, databaseManager, empAccountService);
+        this.manufacturerService.ensureTables();
+        this.manufacturingOrderService = new github.nighter.smartspawner.emp.manufacturing.ManufacturingOrderService(this, databaseManager, empAccountService);
+        this.empPlayerListener = new EmpPlayerListener(empAccountService, activityTracker, gemRewardService, bountyService, killstreakService, chatPresentationService, rankService);
         this.gemRewardService.start();
 
         setupVaultEconomyProvider();
@@ -507,6 +548,9 @@ public class SmartSpawner extends JavaPlugin implements SmartSpawnerPlugin {
         if (empPlayerListener != null) {
             pm.registerEvents(empPlayerListener, this);
         }
+        if (empSpawnerGuiService != null) {
+            pm.registerEvents(empSpawnerGuiService, this);
+        }
 
         // Register near-command listener (player quit cleanup)
         if (spawnerHighlightManager != null) {
@@ -599,6 +643,10 @@ public class SmartSpawner extends JavaPlugin implements SmartSpawnerPlugin {
         
         // Reinitialize FormUI components in case config changed
         initializeFormUIComponents();
+
+        if (empSpawnerProgressionService != null) {
+            empSpawnerProgressionService.reloadConfig();
+        }
     }
 
     @Override
@@ -700,6 +748,10 @@ public class SmartSpawner extends JavaPlugin implements SmartSpawnerPlugin {
         return new SpawnerProvider(this);
     }
 
+    public NamespacedKey getNamespacedKey(String key) {
+        return new NamespacedKey(this, key);
+    }
+
     public boolean hasSellIntegration() {
         if (itemPriceManager == null) {
             return false;
@@ -715,5 +767,13 @@ public class SmartSpawner extends JavaPlugin implements SmartSpawnerPlugin {
         if (debugMode) {
             getLogger().info("[DEBUG] " + message);
         }
+    }
+
+    public github.nighter.smartspawner.emp.manufacturing.ManufacturerService getManufacturerService() {
+        return manufacturerService;
+    }
+
+    public github.nighter.smartspawner.emp.manufacturing.ManufacturingOrderService getManufacturingOrderService() {
+        return manufacturingOrderService;
     }
 }

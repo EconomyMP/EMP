@@ -1,6 +1,7 @@
 package github.nighter.smartspawner.spawner.lootgen;
 
 import github.nighter.smartspawner.SmartSpawner;
+import github.nighter.smartspawner.emp.spawner.EmpSpawnerProgressionService;
 import github.nighter.smartspawner.spawner.data.SpawnerManager;
 import github.nighter.smartspawner.spawner.properties.SpawnerData;
 import github.nighter.smartspawner.Scheduler;
@@ -19,11 +20,13 @@ public class SpawnerRangeChecker {
     private final SmartSpawner plugin;
     private final SpawnerManager spawnerManager;
     private final ExecutorService executor;
+    private final EmpSpawnerProgressionService progressionService;
 
     public SpawnerRangeChecker(SmartSpawner plugin) {
         this.plugin = plugin;
         this.spawnerManager = plugin.getSpawnerManager();
         this.executor = Executors.newSingleThreadExecutor(r -> new Thread(r, "SmartSpawner-RangeCheck"));
+        this.progressionService = plugin.getEmpSpawnerProgressionService();
         initializeRangeCheckTask();
     }
 
@@ -164,6 +167,10 @@ public class SpawnerRangeChecker {
         if (cachedDelay == 0) {
             cachedDelay = (spawner.getSpawnDelay() + 20L) * 50L; // Convert ticks to milliseconds
             spawner.setCachedSpawnDelay(cachedDelay);
+        }
+
+        if (progressionService != null) {
+            cachedDelay = progressionService.getAdjustedSpawnDelayMs(spawner, cachedDelay);
         }
 
         final long finalCachedDelay = cachedDelay; // Make effectively final for lambda

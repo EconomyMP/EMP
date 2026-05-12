@@ -87,6 +87,216 @@ emp:
     double_end:
       message: "&bDouble gems event has ended."
 
+  spawners:
+    shop:
+      invalid:
+        message: "&cThis spawner tier is unavailable."
+      insufficient_gems:
+        message: "&cYou do not have enough gems for that purchase."
+      purchased:
+        message: "&aPurchased &f{spawner}&a for &f{cost}&a."
+    upgrade:
+      look_at_spawner:
+        message: "&cLook at a placed smart spawner to upgrade it."
+      not_emp_spawner:
+        message: "&cThat block is not a tracked smart spawner."
+      no_tier:
+        message: "&cThis spawner does not have a configured tier."
+      maxed:
+        message: "&eThat upgrade path is already maxed."
+      invalid_path:
+        message: "&cInvalid upgrade path."
+      insufficient:
+        message: "&cYou cannot afford this upgrade."
+      persist_failed:
+        message: "&cUpgrade failed to save. You have been refunded."
+      success:
+        message: "&aUpgraded &f{path}&a for &f{cost}&a."
+
+  tpa:
+    self:
+      message: "&cYou cannot send a request to yourself."
+    already_sent:
+      message: "&eYou already have a pending request."
+    target_busy:
+      message: "&eThat player already has a pending request."
+    none:
+      message: "&cYou have no pending request."
+    none_sent:
+      message: "&cYou have no outgoing request."
+    sent:
+      message: "&aTeleport request sent to &f{player}&a."
+    received:
+      message: "&e&f{player} &ewants to teleport to you. Use &f/tpaccept&e, &f/tpdeny&e, or &f/tpcancel&f."
+    accepted:
+      message: "&aAccepted request from &f{player}&a."
+    denied:
+      message: "&eDenied request from &f{player}&e."
+    denied_by_target:
+      message: "&cYour teleport request to &f{player}&c was denied."
+    cancelled:
+      message: "&eCancelled your outgoing request to &f{player}&e."
+    teleported:
+      message: "&aTeleport request accepted by &f{player}&a."
+
+  team:
+    invalid_name:
+      message: "&cPlease provide a valid team name."
+    already_member:
+      message: "&cYou are already in a team."
+    not_in_team:
+      message: "&cYou are not in a team."
+    target_in_team:
+      message: "&cThat player is already in a team."
+    owner_cannot_leave:
+      message: "&cThe team owner must disband the team instead."
+    not_owner:
+      message: "&cOnly the team owner can do that."
+    no_invite:
+      message: "&cYou have no active team invite."
+    database_error:
+      message: "&cSomething went wrong while updating the team."
+    created:
+      message: "&aCreated team &f{team}&a."
+    invited:
+      message: "&aInvited &f{player}&a to your team."
+    invited_target:
+      message: "&eYou received a team invite from &f{player}&e. Use &f/team accept&e."
+    accepted:
+      message: "&aYou joined &f{team}&a."
+    left:
+      message: "&eYou left your team."
+    disbanded:
+      message: "&cYour team has been disbanded."
+    info_header:
+      message: "&6Team &f{team}&6 (&f{count}&6 members)"
+    info_member:
+      message: "&7- &f{player} &8(&e{role}&8)"
+
+  bounty:
+    self:
+      message: "&6Bounty on you: &f{amount}"
+    invalid_amount:
+      message: "&cInvalid bounty amount."
+    invalid:
+      message: "&cThat bounty could not be placed."
+    insufficient:
+      message: "&cYou do not have enough money to place that bounty."
+    self_error:
+      message: "&cYou cannot place a bounty on yourself."
+    placed:
+      message: "&aPlaced a bounty of &f{amount}&a on &f{player}&a."
+    empty:
+      message: "&cNo bounties have been placed yet."
+    header:
+      message: "&6Top Bounties"
+    entry:
+      message: "&e#{rank} &f{player} &7- &a{amount}"
+
+  streak:
+    self:
+      message: "&6Current streak: &f{current}&6 | Best: &f{best}"
+    empty:
+      message: "&cNo killstreaks found yet."
+    header:
+      message: "&6Top Killstreaks"
+    entry:
+      message: "&e#{rank} &f{player} &7- &a{current}&7 (&bbest {best}&7)"
+
+  ah:
+    empty:
+      message: "&cNo active auctions found."
+    header:
+      message: "&6Auction House Listings"
+    entry:
+      message: "&e#{id} &f{item} &7- &a{price} &7(&f{seller}&7)"
+    listed:
+      message: "&aListed &f{item}&a for &f{price}&a as auction &f#{id}&a."
+    bought:
+      message: "&aBought auction &f#{id}&a for &f{price}&a."
+    cancelled:
+      message: "&eCancelled auction &f#{id}&e and returned &f{item}&e."
+    no_item:
+      message: "&cHold an item in your main hand to list it."
+    invalid_price:
+      message: "&cInvalid auction price."
+    not_found:
+      message: "&cAuction listing not found."
+    self_buy:
+      message: "&cYou cannot buy your own listing."
+    expired:
+      message: "&cThat auction has expired or been purchased."
+    insufficient:
+      message: "&cYou cannot afford that listing."
+    not_owner:
+      message: "&cYou do not own that listing."
+    sold:
+      message: "&cThat listing has already been sold."
+    failed:
+      message: "&cThe auction house operation failed."
+
+  rank:
+    self:
+      message: "&6Rank: &f{rank} &7- &f{description}&7"
+    next:
+      message: "&6Next: &f{next}&7 at &f{next_threshold}&7 balance"
+
+  mfg:
+    registered:
+      message: "&aYour shop &f{shop}&a has been registered!"
+    not_manufacturer:
+      message: "&cYou are not registered as a manufacturer. Use &f/mfg register <shop_name>&c."
+    already_registered:
+      message: "&cYou are already registered as a manufacturer."
+    insufficient_funds:
+      message: "&cInsufficient funds for registration fee."
+    database_error:
+      message: "&cDatabase error. Please try again."
+    listed:
+      message: "&aListed &f{item}&a (qty: {qty}) at &f{price}&a each."
+    failed:
+      message: "&cOperation failed."
+    no_results:
+      message: "&cNo manufacturers found for that item."
+    search_header:
+      message: "&6Manufacturing Search Results"
+    search_entry:
+      message: "&e{shop} &7- &f{item} &7at &a{price} &7(qty: {qty})"
+    shop_not_found:
+      message: "&cThat shop does not exist."
+    shop_header:
+      message: "&6=== &f{shop}&6 === &7(Owner: {owner})"
+    shop_item:
+      message: "&e{item} &7- &a{price} &7(qty: {qty})"
+    item_not_found:
+      message: "&cThat manufacturer doesn't have that item."
+    insufficient_stock:
+      message: "&cInsufficient stock available."
+    order_placed:
+      message: "&aOrder placed with &f{manufacturer}&a for &f{qty} {item}&a."
+    no_orders:
+      message: "&cNo orders found."
+    buyer_orders:
+      message: "&6=== Your Purchase Orders ==="
+    manufacturer_orders:
+      message: "&6=== Orders to Fulfill ==="
+    order_entry:
+      message: "&e[#{id}] &f{item} &7(qty: {qty}) &7from/to &f{buyer}{manufacturer} &7- Status: {status}"
+    order_completed:
+      message: "&aOrder &f#{id}&a completed! Payment received."
+    not_owner:
+      message: "&cYou don't own that order."
+    already_completed:
+      message: "&cThat order is already completed."
+    not_found:
+      message: "&cOrder not found."
+    inventory_header:
+      message: "&6=== Your Shop Inventory ==="
+    inventory_empty:
+      message: "&cYour shop is empty. Use &f/mfg add&c to list items."
+    inventory_item:
+      message: "&e{item} &7- &a{price} &7(qty: {qty})"
+
 # ──────────────────────────────────────────────────────
 #                        /ss near
 # ──────────────────────────────────────────────────────

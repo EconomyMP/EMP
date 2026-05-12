@@ -69,3 +69,238 @@ double_gems:
       - SUNDAY
     start_time: "00:00"
     end_time: "23:59"
+
+# ---------------------------------------------------
+#             Spawner Shop and Upgrades
+# ---------------------------------------------------
+spawners:
+  tiers:
+    ZOMBIE:
+      display_name: "Zombie Spawner"
+      entity: ZOMBIE
+      output:
+        material: ROTTEN_FLESH
+        per_minute: 2
+      price_gems: 250
+      upgrades:
+        speed:
+          max_level: 10
+          delay_reduction_per_level: 0.04
+          currency: MONEY
+          costs: [200, 400, 700, 1100, 1600, 2300, 3100, 4000, 5000, 6200]
+        multiplier:
+          max_level: 10
+          per_level: 0.08
+          currency: MONEY
+          costs: [300, 550, 900, 1300, 1800, 2400, 3100, 3900, 4800, 5800]
+        efficiency:
+          max_level: 10
+          chance_bonus_per_level: 2.0
+          currency: GEMS
+          costs: [40, 65, 95, 130, 170, 215, 265, 320, 380, 450]
+
+    COW:
+      display_name: "Cow Spawner"
+      entity: COW
+      output:
+        material: LEATHER
+        per_minute: 2
+      price_gems: 500
+      upgrades:
+        speed:
+          max_level: 12
+          delay_reduction_per_level: 0.04
+          currency: MONEY
+          costs: [350, 600, 900, 1250, 1650, 2100, 2600, 3150, 3750, 4400, 5100, 5850]
+        multiplier:
+          max_level: 12
+          per_level: 0.09
+          currency: MONEY
+          costs: [420, 700, 1030, 1410, 1840, 2320, 2850, 3430, 4060, 4740, 5470, 6250]
+        efficiency:
+          max_level: 12
+          chance_bonus_per_level: 2.1
+          currency: GEMS
+          costs: [55, 80, 110, 145, 185, 230, 280, 335, 395, 460, 530, 605]
+
+    SLIME:
+      display_name: "Slime Spawner"
+      entity: SLIME
+      output:
+        material: SLIME_BALL
+        per_minute: 2
+      price_gems: 750
+      upgrades:
+        speed:
+          max_level: 12
+          delay_reduction_per_level: 0.045
+          currency: MONEY
+          costs: [500, 770, 1090, 1460, 1880, 2350, 2870, 3440, 4060, 4730, 5450, 6220]
+        multiplier:
+          max_level: 12
+          per_level: 0.10
+          currency: MONEY
+          costs: [580, 880, 1230, 1630, 2080, 2580, 3130, 3730, 4380, 5080, 5830, 6630]
+        efficiency:
+          max_level: 12
+          chance_bonus_per_level: 2.2
+          currency: GEMS
+          costs: [70, 100, 135, 175, 220, 270, 325, 385, 450, 520, 595, 675]
+
+    MAGMA_CUBE:
+      display_name: "Magma Spawner"
+      entity: MAGMA_CUBE
+      output:
+        material: MAGMA_CREAM
+        per_minute: 2
+      price_gems: 1000
+      upgrades:
+        speed:
+          max_level: 13
+          delay_reduction_per_level: 0.045
+          currency: MONEY
+          costs: [650, 950, 1300, 1700, 2150, 2650, 3200, 3800, 4450, 5150, 5900, 6700, 7550]
+        multiplier:
+          max_level: 13
+          per_level: 0.105
+          currency: MONEY
+          costs: [740, 1070, 1450, 1880, 2360, 2890, 3470, 4100, 4780, 5510, 6290, 7120, 8000]
+        efficiency:
+          max_level: 13
+          chance_bonus_per_level: 2.3
+          currency: GEMS
+          costs: [85, 118, 156, 199, 247, 300, 358, 421, 489, 562, 640, 723, 811]
+
+    SKELETON:
+      display_name: "Skeleton Spawner"
+      entity: SKELETON
+      output:
+        material: BONE
+        per_minute: 2
+      price_gems: 1250
+      upgrades:
+        speed:
+          max_level: 14
+          delay_reduction_per_level: 0.05
+          currency: MONEY
+          costs: [810, 1140, 1520, 1950, 2430, 2960, 3540, 4170, 4850, 5580, 6360, 7190, 8070, 9000]
+        multiplier:
+          max_level: 14
+          per_level: 0.11
+          currency: MONEY
+          costs: [900, 1260, 1670, 2130, 2640, 3200, 3810, 4470, 5180, 5940, 6750, 7610, 8520, 9480]
+        efficiency:
+          max_level: 14
+          chance_bonus_per_level: 2.4
+          currency: GEMS
+          costs: [100, 136, 177, 223, 274, 330, 391, 457, 528, 604, 685, 771, 862, 958]
+
+    CREEPER:
+      display_name: "Creeper Spawner"
+      entity: CREEPER
+      output:
+        material: GUNPOWDER
+        per_minute: 2
+      price_gems: 1500
+      upgrades:
+        speed:
+          max_level: 14
+          delay_reduction_per_level: 0.05
+          currency: MONEY
+          costs: [980, 1340, 1750, 2210, 2720, 3280, 3890, 4550, 5260, 6020, 6830, 7690, 8600, 9560]
+        multiplier:
+          max_level: 14
+          per_level: 0.115
+          currency: MONEY
+          costs: [1080, 1470, 1910, 2400, 2940, 3530, 4170, 4860, 5600, 6390, 7230, 8120, 9060, 10050]
+        efficiency:
+          max_level: 14
+          chance_bonus_per_level: 2.5
+          currency: GEMS
+          costs: [115, 154, 198, 247, 301, 360, 424, 493, 567, 646, 730, 819, 913, 1012]
+
+    BLAZE:
+      display_name: "Blaze Spawner"
+      entity: BLAZE
+      output:
+        material: BLAZE_ROD
+        per_minute: 2
+      price_gems: 1500
+      upgrades:
+        speed:
+          max_level: 15
+          delay_reduction_per_level: 0.05
+          currency: MONEY
+          costs: [1040, 1410, 1830, 2300, 2820, 3390, 4010, 4680, 5400, 6170, 6990, 7860, 8780, 9750, 10770]
+        multiplier:
+          max_level: 15
+          per_level: 0.12
+          currency: MONEY
+          costs: [1140, 1540, 1990, 2490, 3040, 3640, 4290, 4990, 5740, 6540, 7390, 8290, 9240, 10240, 11290]
+        efficiency:
+          max_level: 15
+          chance_bonus_per_level: 2.6
+          currency: GEMS
+          costs: [120, 161, 207, 258, 314, 375, 441, 512, 588, 669, 755, 846, 942, 1043, 1149]
+
+    IRON_GOLEM:
+      display_name: "Golem Spawner"
+      entity: IRON_GOLEM
+      output:
+        material: IRON_INGOT
+        per_minute: 10
+      price_gems: 5000
+      upgrades:
+        speed:
+          max_level: 25
+          delay_reduction_per_level: 0.06
+          currency: GEMS
+          costs: [350, 430, 520, 620, 730, 850, 980, 1120, 1270, 1430, 1600, 1780, 1970, 2170, 2380, 2600, 2830, 3070, 3320, 3580, 3850, 4130, 4420, 4720, 5030]
+        multiplier:
+          max_level: 25
+          per_level: 0.16
+          currency: GEMS
+          costs: [420, 510, 610, 720, 840, 970, 1110, 1260, 1420, 1590, 1770, 1960, 2160, 2370, 2590, 2820, 3060, 3310, 3570, 3840, 4120, 4410, 4710, 5020, 5340]
+        efficiency:
+          max_level: 25
+          chance_bonus_per_level: 3.2
+          currency: GEMS
+          costs: [300, 370, 450, 540, 640, 750, 870, 1000, 1140, 1290, 1450, 1620, 1800, 1990, 2190, 2400, 2620, 2850, 3090, 3340, 3600, 3870, 4150, 4440, 4740]
+
+chat:
+  enabled: true
+  tab:
+    enabled: true
+    show_team_tag: true
+    show_killstreak: true
+  format:
+    team_color: GOLD
+    bounty_color: GREEN
+    streak_color: RED
+
+auction_house:
+  enabled: true
+  default_duration_hours: 24
+  max_listings_per_player: 12
+
+manufacturing:
+  registration_fee: 10000
+  order_expiration_hours: 72
+
+ranks:
+  definitions:
+    NOVICE:
+      display_name: "Novice"
+      prefix: "&7[&fNovice&7]"
+      threshold_balance: 0
+      description: "Just starting out"
+    VETERAN:
+      display_name: "Veteran"
+      prefix: "&7[&aVeteran&7]"
+      threshold_balance: 100000
+      description: "Seasoned player"
+    ELITE:
+      display_name: "Elite"
+      prefix: "&7[&bElite&7]"
+      threshold_balance: 1000000
+      description: "Highly progressed"

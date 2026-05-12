@@ -133,6 +133,105 @@ dependencies:
       required: false
       join-classpath: true
 
+commands:
+  smartspawner:
+    description: Main command for EMP spawner systems
+    usage: /smartspawner [reload|give|list|hologram|prices|clear|near] [args...]
+    aliases: [ ss, spawner ]
+    permission: smartspawner.command.use
+    permission-message: "You don't have permission to use EMP spawner commands!"
+
+  bal:
+    description: View your balance or another player's balance
+    usage: /bal [player]
+    aliases: [ balance ]
+    permission: emp.command.bal
+
+  pay:
+    description: Pay another player money
+    usage: /pay <player> <amount>
+    permission: emp.command.pay
+
+  baltop:
+    description: View the top money balances
+    usage: /baltop [page]
+    permission: emp.command.baltop
+
+  eco:
+    description: Economy admin commands
+    usage: /eco <give|take|set> <player> <amount>
+    permission: emp.command.eco
+
+  gems:
+    description: View and manage gem balances
+    usage: /gems [pay|give|take] <player> <amount>
+    permission: emp.command.gems
+
+  shop:
+    description: Open EMP shop
+    usage: /shop
+    permission: emp.command.shop
+
+  spawnershop:
+    description: Open EMP spawner shop
+    usage: /spawnershop
+    permission: emp.command.spawnershop
+
+  spawnerupgrades:
+    description: Open upgrades for the spawner you are looking at
+    usage: /spawnerupgrades
+    permission: emp.command.spawnerupgrades
+
+  tpa:
+    description: Send a teleport request
+    usage: /tpa <player>
+    permission: emp.command.tpa
+
+  tpaccept:
+    description: Accept the last teleport request
+    usage: /tpaccept
+    permission: emp.command.tpa
+
+  tpdeny:
+    description: Deny the last teleport request
+    usage: /tpdeny
+    permission: emp.command.tpa
+
+  tpcancel:
+    description: Cancel your outgoing teleport request
+    usage: /tpcancel
+    permission: emp.command.tpa
+
+  team:
+    description: Team management command
+    usage: /team <create|invite|accept|leave|disband|info>
+    permission: emp.command.team
+
+  bounty:
+    description: Manage bounties
+    usage: /bounty [add|top]
+    permission: emp.command.bounty
+
+  streak:
+    description: View killstreaks
+    usage: /streak [top]
+    permission: emp.command.streak
+
+  ah:
+    description: Open and manage the auction house
+    usage: /ah [list|sell|buy|cancel]
+    permission: emp.command.ah
+
+  rank:
+    description: View your current rank
+    usage: /rank
+    permission: emp.command.rank
+
+  mfg:
+    description: Manufacturing and business system
+    usage: /mfg [register|add|search|shop|order|orders|deliver|inventory]
+    permission: emp.command.mfg
+
 # Permissions
 permissions:
   # Main command permission
@@ -184,4 +283,68 @@ permissions:
 
   smartspawner.sellall:
     description: "Allow selling items in spawner storage GUI"
+    default: true
+
+  emp.command.balance:
+    description: "Allow using balance commands"
+    default: true
+
+  emp.command.pay:
+    description: "Allow using pay command"
+    default: true
+
+  emp.command.baltop:
+    description: "Allow using baltop command"
+    default: true
+
+  emp.command.eco:
+    description: "Allow using economy admin command"
+    default: op
+
+  emp.command.gems:
+    description: "Allow using gems command"
+    default: true
+
+  emp.command.gems.admin:
+    description: "Allow admin gem commands"
+    default: op
+
+  emp.command.shop:
+    description: "Allow opening shop GUI"
+    default: true
+
+  emp.command.spawnershop:
+    description: "Allow opening spawner shop GUI"
+    default: true
+
+  emp.command.spawnerupgrades:
+    description: "Allow opening spawner upgrade GUI"
+    default: true
+
+  emp.command.tpa:
+    description: "Allow using TPA commands"
+    default: true
+
+  emp.command.team:
+    description: "Allow using team commands"
+    default: true
+
+  emp.command.bounty:
+    description: "Allow using bounty commands"
+    default: true
+
+  emp.command.streak:
+    description: "Allow viewing killstreak commands"
+    default: true
+
+  emp.command.ah:
+    description: "Allow using auction house commands"
+    default: true
+
+  emp.command.rank:
+    description: "Allow using rank commands"
+    default: true
+
+  emp.command.mfg:
+    description: "Allow using manufacturing commands"
     default: true
