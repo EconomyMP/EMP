@@ -1,6 +1,7 @@
 package github.nighter.smartspawner.emp.commands;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import com.mojang.brigadier.context.CommandContext;
 import github.nighter.smartspawner.Scheduler;
@@ -61,7 +62,13 @@ public class BalanceCommand {
         CommandSender sender = context.getSource().getSender();
         var playerSelector = context.getArgument("player",
                 io.papermc.paper.command.brigadier.argument.resolvers.selector.PlayerSelectorArgumentResolver.class);
-        List<Player> players = playerSelector.resolve(context.getSource());
+        List<Player> players;
+        try {
+            players = playerSelector.resolve(context.getSource());
+        } catch (CommandSyntaxException e) {
+            plugin.getMessageService().sendMessage(sender, "emp.player_not_found");
+            return 0;
+        }
 
         if (players.isEmpty()) {
             plugin.getMessageService().sendMessage(sender, "emp.player_not_found");

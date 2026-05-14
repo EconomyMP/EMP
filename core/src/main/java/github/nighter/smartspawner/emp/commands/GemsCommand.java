@@ -95,7 +95,13 @@ public class GemsCommand {
         Player player = (Player) sender;
         var playerSelector = context.getArgument("player",
                 io.papermc.paper.command.brigadier.argument.resolvers.selector.PlayerSelectorArgumentResolver.class);
-        List<Player> targets = playerSelector.resolve(context.getSource());
+        List<Player> targets;
+        try {
+            targets = playerSelector.resolve(context.getSource());
+        } catch (com.mojang.brigadier.exceptions.CommandSyntaxException e) {
+            plugin.getMessageService().sendMessage(sender, "emp.player_not_found");
+            return 0;
+        }
 
         if (targets.isEmpty()) {
             plugin.getMessageService().sendMessage(sender, "emp.player_not_found");
