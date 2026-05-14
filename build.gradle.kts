@@ -10,7 +10,7 @@ allprojects {
     apply(plugin = "maven-publish")
 
     group = "github.nighter"
-    version = "1.0.3"
+    version = "1.0.4"
 
     repositories {
         mavenCentral()
