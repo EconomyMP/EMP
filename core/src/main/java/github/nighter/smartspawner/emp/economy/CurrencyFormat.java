@@ -53,7 +53,36 @@ public class CurrencyFormat {
             cleaned = cleaned.replace(decimalSeparator, '.');
         }
 
+        cleaned = cleaned.trim();
+        BigDecimal multiplier = BigDecimal.ONE;
+        if (!cleaned.isEmpty()) {
+            char suffix = Character.toLowerCase(cleaned.charAt(cleaned.length() - 1));
+            switch (suffix) {
+                case 'k' -> {
+                    multiplier = BigDecimal.valueOf(1_000L);
+                    cleaned = cleaned.substring(0, cleaned.length() - 1).trim();
+                }
+                case 'm' -> {
+                    multiplier = BigDecimal.valueOf(1_000_000L);
+                    cleaned = cleaned.substring(0, cleaned.length() - 1).trim();
+                }
+                case 'b' -> {
+                    multiplier = BigDecimal.valueOf(1_000_000_000L);
+                    cleaned = cleaned.substring(0, cleaned.length() - 1).trim();
+                }
+                case 't' -> {
+                    multiplier = BigDecimal.valueOf(1_000_000_000_000L);
+                    cleaned = cleaned.substring(0, cleaned.length() - 1).trim();
+                }
+            }
+        }
+
+        if (cleaned.isEmpty()) {
+            throw new IllegalArgumentException("Amount is required");
+        }
+
         BigDecimal value = new BigDecimal(cleaned);
+        value = value.multiply(multiplier);
         value = value.setScale(decimals, RoundingMode.HALF_UP);
         return value.movePointRight(decimals).longValueExact();
     }

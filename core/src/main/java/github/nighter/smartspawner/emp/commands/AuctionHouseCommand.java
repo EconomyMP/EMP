@@ -35,13 +35,13 @@ public class AuctionHouseCommand {
         builder.requires(source -> EmpCommandUtil.hasPermission(source.getSender(), "emp.command.ah"));
         builder.executes(context -> executeList(context, 1));
         builder.then(Commands.literal("list")
-                .then(Commands.argument("page", StringArgumentType.word()).executes(context -> executeList(context, parsePage(context, "page")))))
-                .then(Commands.literal("sell")
-                        .then(Commands.argument("price", StringArgumentType.word()).executes(this::executeSell)))
-                .then(Commands.literal("buy")
-                        .then(Commands.argument("id", StringArgumentType.word()).executes(this::executeBuy)))
-                .then(Commands.literal("cancel")
-                        .then(Commands.argument("id", StringArgumentType.word()).executes(this::executeCancel)));
+            .then(Commands.argument("page", StringArgumentType.word()).executes(context -> executeList(context, parsePage(context, "page")))));
+        builder.then(Commands.literal("sell")
+            .then(Commands.argument("price", StringArgumentType.word()).executes(this::executeSell)));
+        builder.then(Commands.literal("buy")
+            .then(Commands.argument("id", StringArgumentType.word()).executes(this::executeBuy)));
+        builder.then(Commands.literal("cancel")
+            .then(Commands.argument("id", StringArgumentType.word()).executes(this::executeCancel)));
         return builder.build();
     }
 
