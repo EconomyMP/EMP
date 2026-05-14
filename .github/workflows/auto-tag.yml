@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   version-and-tag:
-    if: github.actor != 'github-actions[bot]'
+    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
