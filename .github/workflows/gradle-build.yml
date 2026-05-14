@@ -75,7 +75,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: SmartSpawner-${{ steps.extract_version.outputs.version }}
-          path: core/build/libs/SmartSpawner-${{ steps.extract_version.outputs.version }}.jar
+          path: core/build/libs/EMP-${{ steps.extract_version.outputs.version }}.jar
           retention-days: 90
           if-no-files-found: error
 

@@ -82,7 +82,7 @@ jobs:
             - 📱 15+ Commands - Fully async database operations
             
             ## Installation
-            Download `EMP-core-${{ steps.tag_version.outputs.version }}.jar` and place it in your plugins folder.
+            Download `EMP-${{ steps.tag_version.outputs.version }}.jar` and place it in your plugins folder.
             
             **Requires:** Paper 1.21.3 or higher
           draft: false
@@ -95,7 +95,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./core/build/libs/core-${{ steps.tag_version.outputs.version }}.jar
-          asset_name: EMP-core-${{ steps.tag_version.outputs.version }}.jar
+          asset_path: ./core/build/libs/EMP-${{ steps.tag_version.outputs.version }}.jar
+          asset_name: EMP-${{ steps.tag_version.outputs.version }}.jar
           asset_content_type: application/java-archive
         continue-on-error: true
