@@ -69,12 +69,14 @@ jobs:
           sed -i -E 's/^\s*version\s*=\s*"[^"]+"/    version = "${{ steps.semver.outputs.version }}"/' build.gradle.kts
 
       - name: Commit version bump and push tag
+        id: publish
         run: |
           set -euo pipefail
           TAG="${{ steps.semver.outputs.tag }}"
 
           if git rev-parse "$TAG" >/dev/null 2>&1; then
             echo "Tag $TAG already exists; skipping."
+            echo "tag_created=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
@@ -85,5 +87,70 @@ jobs:
           git commit -m "chore(release): ${TAG} [skip ci]"
           git tag -a "$TAG" -m "Release $TAG"
           git push origin main "$TAG"
+          echo "tag_created=true" >> "$GITHUB_OUTPUT"
 
           echo "Pushed version bump and tag: $TAG"
+
+      - name: Set up JDK 21
+        if: steps.publish.outputs.tag_created == 'true'
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Build release artifact
+        if: steps.publish.outputs.tag_created == 'true'
+        run: |
+          chmod +x ./gradlew
+          ./gradlew :core:build -x test --no-build-cache
+
+      - name: Generate changelog
+        if: steps.publish.outputs.tag_created == 'true'
+        id: changelog
+        run: |
+          set -euo pipefail
+          PREV_TAG="${{ steps.semver.outputs.last_tag }}"
+
+          if [ "$PREV_TAG" = "v0.0.0" ]; then
+            CHANGELOG=$(git log --oneline --format="- %s" | head -20)
+          else
+            CHANGELOG=$(git log "${PREV_TAG}..HEAD" --oneline --format="- %s")
+          fi
+
+          CHANGELOG="${CHANGELOG//'%'/'%25'}"
+          CHANGELOG="${CHANGELOG//$'\n'/'%0A'}"
+          CHANGELOG="${CHANGELOG//$'\r'/'%0D'}"
+          echo "changelog=$CHANGELOG" >> "$GITHUB_OUTPUT"
+
+      - name: Create release
+        if: steps.publish.outputs.tag_created == 'true'
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.semver.outputs.tag }}
+          release_name: "Release ${{ steps.semver.outputs.version }}"
+          body: |
+            # EMP (Economy Multiplayer) v${{ steps.semver.outputs.version }}
+
+            ## What's New
+            ${{ steps.changelog.outputs.changelog }}
+
+            ## Installation
+            Download `EMP-${{ steps.semver.outputs.version }}.jar` and place it in your plugins folder.
+
+            **Requires:** Paper 1.21.3 or higher
+          draft: false
+          prerelease: false
+
+      - name: Upload release artifact
+        if: steps.publish.outputs.tag_created == 'true'
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./core/build/libs/EMP-${{ steps.semver.outputs.version }}.jar
+          asset_name: EMP-${{ steps.semver.outputs.version }}.jar
+          asset_content_type: application/java-archive
