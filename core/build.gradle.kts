@@ -28,7 +28,7 @@ dependencies {
     compileOnly("com.palmergames.bukkit.towny:towny:0.102.0.14")
     compileOnly("com.bgsoftware:SuperiorSkyblockAPI:2026.1")
     compileOnly("com.github.MilkBowl:VaultAPI:1.7.1")
-    compileOnly("su.nightexpress.coinsengine:CoinsEngine:2.6.0")
+    compileOnly("su.nightexpress.coinsengine:CoinsEngine:2.7.0")
     compileOnly("com.github.Gypopo:EconomyShopGUI-API:1.9.0")
     compileOnly("world.bentobox:bentobox:3.15.0")
     compileOnly("su.nightexpress.excellentshop:Core:4.22.0")
