@@ -28,14 +28,14 @@ public class ManufacturingOrderService {
 
     public OrderResult placeOrder(Player buyer, UUID manufacturerUuid, String manufacturerName, String itemName, int quantity, long pricePerUnit) {
         if (quantity <= 0 || pricePerUnit <= 0) {
-            return OrderResult.fail("invalid_params");
+            return OrderResult.ofFail("invalid_params");
         }
 
         long totalPrice = pricePerUnit * quantity;
         var charged = accountService.takeBalance(buyer.getUniqueId(), buyer.getName(), CurrencyType.MONEY,
                 totalPrice, "MFG_ORDER", manufacturerName, itemName);
         if (!charged.success()) {
-            return OrderResult.fail("insufficient_funds");
+            return OrderResult.ofFail("insufficient_funds");
         }
 
         try (Connection conn = databaseManager.getConnection();
@@ -49,12 +49,12 @@ public class ManufacturingOrderService {
             stmt.setLong(7, pricePerUnit);
             stmt.setLong(8, totalPrice);
             stmt.executeUpdate();
-            return OrderResult.success();
+            return OrderResult.ofSuccess();
         } catch (SQLException e) {
             plugin.getLogger().warning("Failed to place order: " + e.getMessage());
             accountService.addBalance(buyer.getUniqueId(), buyer.getName(), CurrencyType.MONEY, totalPrice,
                     "MFG_ORDER_REFUND", manufacturerName, itemName);
-            return OrderResult.fail("database_error");
+            return OrderResult.ofFail("database_error");
         }
     }
 
