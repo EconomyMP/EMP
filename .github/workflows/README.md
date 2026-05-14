@@ -4,15 +4,19 @@ This directory contains automated workflows for EMP (Economy Multiplayer) plugin
 
 ## 🚀 Available Workflows
 
-### 1. **Auto Tag** (`auto-tag.yml`)
-**Triggers:** Automatically when `build.gradle.kts` changes on `main` branch
+### 1. **Auto Version + Tag** (`auto-tag.yml`)
+**Triggers:** On every push to `main` (except bot-generated pushes)
 
 **What it does:**
-- Extracts version from `build.gradle.kts`
-- Creates a git tag (e.g., `v1.0.0`) if it doesn't exist
-- Pushes tag to GitHub
+- Reads commit history since the previous tag
+- Calculates semantic bump automatically:
+   - `major` for `BREAKING CHANGE` or `type!:` commits
+   - `minor` for `feat:` commits
+   - `patch` otherwise
+- Updates `build.gradle.kts` version automatically
+- Commits the version bump and creates/pushes a new tag (e.g., `v1.0.1`)
 
-**When to use:** Update version in `build.gradle.kts` → Auto Tag creates tag → Auto Release follows
+**When to use:** Push to `main` → version/tag are generated automatically → Auto Release follows
 
 ---
 
@@ -68,11 +72,11 @@ This directory contains automated workflows for EMP (Economy Multiplayer) plugin
 
 ## 📋 Release Process (Automated)
 
-### Method 1: Manual Version Bump
+### Method 1: Fully Automatic (Recommended)
 ```
-1. Modify version in build.gradle.kts
-2. Commit and push to main
-3. Auto Tag creates tag automatically
+1. Push commits to main
+2. Auto Version + Tag computes next semver from commit history
+3. Workflow updates build.gradle.kts and pushes vX.Y.Z tag
 4. Auto Release creates release automatically
 ```
 
